@@ -1,0 +1,409 @@
+{% extends 'bases/base.html'%}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+   
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+<!--FontAwesome CDN ...necessary for the icons-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+    integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+
+<script src="{% static 'js/chart.min.js' %}">/*Remember that this is a dist file.... source is: 
+https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js*/
+
+</script>
+<!--Chartjs CDN-->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
+<style>
+    /* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {}
+
+/* .............. note that 1cm = 37.8px.....................*/
+
+  
+    body {
+        /*background-color: #F6F7F8;*/
+        font-size: 2rem;
+        opacity: 1;
+        position:sticky;
+        overflow: auto;
+        text-align: left;
+        max-width: 100%; 
+        background-color: #F6F7F8;
+        margin: auto;
+        padding: auto;
+        
+
+    }
+   
+    .container{
+      background-color: #F6F7F8;
+      }
+    .container tr:hover {
+      background-color: #FFF;
+      color: black;
+    }
+    table{
+      background-color: #F6F7F8;
+    }
+.mybuttonlinks{
+    margin-top: 7px; margin-left: 7px;
+    margin-bottom: 5px;
+ 
+}
+#allif-section-headers{
+    background-color: #e9eaec;
+    color: black;
+    font-size: 16px;
+    text-align: center;
+}
+#allif-link-buttons{
+    background-color: #F6F7F8;
+    color: black;
+}
+#allif-link-buttons:hover {
+    background-color: #714b67;
+    color: white;
+}
+
+
+a:link{
+  text-decoration: none;
+  
+}
+       
+                      
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:200px) and (max-width:800px) {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+        .container {
+            
+            margin-top: 110px;
+            /*display: inline-block;
+            overflow: auto;*/
+            font-size: 0.95rem;
+           
+            
+            color:black;
+            overflow: auto;
+            overflow-x: scroll;
+            overflow-y: scroll;
+            height: 480px;
+          
+        }
+        .mycomments{
+          display: none;
+        }
+       
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+
+  
+ 
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:800px) and (max-width:1000px) {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+        .container{
+            
+            /*display: inline-block;
+            overflow: auto;*/
+            font-size: 0.95rem;
+           
+            margin-top: 8px;
+            margin-left: auto;
+            padding-left: 90px;
+            
+        }
+        
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+
+ 
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:1000px) and (max-width:2000px) {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+        .container {
+            
+            margin-top: 10px;
+            display: block;
+           
+            font-size: 0.95rem;
+            
+            margin-left:auto ;
+            
+            margin-right: auto;
+            margin: auto;
+            padding-left: 90px;
+            
+        }
+        
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:2000px)  {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+       .container {
+            
+            margin-top: 10px;
+            display: block;
+            overflow: auto;
+            font-size: 1.00rem;
+            
+            margin-left: 120px;
+            overflow-x: hidden;
+            margin-right: 20px;
+           
+        }
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+ 
+    </style>
+   {%endblock%}
+   
+   {% block body %}
+ 
+<div class="container"><!--start of main container of the page--...#17a2b8;  -->
+  <div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div id="allif-section-headers" class="card-header ">
+
+              Fill Up Details
+            </div>
+            <div class="card-body">
+                
+              <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                     
+                      <th scope="col">Name</th>
+                      <th scope="col">Quantity (Ltrs)</th>
+                      <th scope="col">Unit Price ($)</th>
+                     
+                    </tr>
+                  </thead>
+                  
+                  <tbody>
+                    <tr>
+                        <td>{{fillup.id}}</td>
+                       
+                  
+                      
+                        <td>{{fillup.vehicle}}</td>
+                        <td>{{fillup.quantity}}</td>
+                        <td>{{fillup.unit_price}}</td>
+                       
+                      </tr>
+                   
+                   
+                  </tbody>
+                </table>
+                  
+            </div>
+        </div>
+        <br>
+
+        <div class="card">
+          <div id="allif-section-headers" class="card-header ">
+
+        Fill Up Details
+          </div>
+          <div class="card-body">
+              
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                          
+                      
+                    <th scope="col">Odometer</th>
+                    <th scope="col">Oil Type</th>
+                    <th scope="col">Station</th>
+                    
+                  </tr>
+                </thead>
+                
+                <tbody>
+                  <tr>
+                      
+                      
+                      <td>{{fillup.odometer}}</td>
+                      <td>{{fillup.oil_type}}</td>
+                      <td>{{fillup.station}}</td>
+                      
+                    </tr>
+                 
+                </tbody>
+              </table>
+                
+          </div>
+      </div>
+     <br>
+      <!--start this is ok-->
+
+
+
+      <!--end section -->
+    </div>
+   
+    <div class="col-md-6">
+
+        <div class="card">
+            <div id="allif-section-headers" class="card-header ">
+                Fill Up Details
+            </div>
+
+            
+            <div class="card-body">
+                <div class="row">
+                   <!--main content-->
+                   <table class="table table-hover">
+                    <thead>
+                      <tr>
+                       
+                        <th scope="col">Operator</th>
+                        <th scope="col">Payment</th>
+                        <th scope="col">Receipt</th>
+                        
+
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                      <tr> 
+                          <td>{{fillup.operator}}</td>
+                          <td>{{fillup.payment}}</td>
+                          <td> 
+                            {% if fillup.receipt %}
+                            <a href="{{fillup.receipt.url }}" class="btn btn-primary btn-sm" target="_blank" >
+                               <img src="{% static 'images/download.png'%}" width="30">
+                               {% else %}
+                               No Receipt<img src="{% static 'images/download.png'%}" width="30">
+
+                              
+                            </a></td>
+                        {% endif %}
+                          
+                        </tr>
+                    </tbody>
+                  </table>
+                  
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <!-- start section which is ok-->
+        <div class="card">
+          <div id="allif-section-headers" class="card-header ">
+              
+          Fill Up Details
+          </div>
+          <div class="card-body">
+              <div class="row">
+                 <!--main content-->
+                 <table class="table table-hover">
+                  <thead>
+                    <tr>      
+                      <th scope="col">Fuel Brand</th>
+                      <th scope="col">Notes</th>
+                      <th scope="col">Date</th>
+                      
+                    </tr>
+                  </thead>
+                  
+                  <tbody>
+                    <tr>
+                        <td>{{fillup.fuel_brand}}</td>
+                        <td>{{fillup.notes}}</td>
+                        <td>{{fillup.date}}</td>
+                       
+                      </tr>
+                  </tbody>
+                </table>
+              </div>
+          </div>
+      </div>
+      <br>
+<!--end section which is ok-->
+
+</div>
+
+</div>
+
+    <!--start of first row-->
+    <div class="row mt-12" >
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div id="allif-section-headers" class="card-header ">
+                  <a  href="{% url 'logistics:fill_ups' %}">
+                    <button id="allif-link-buttons" type="button" class="btn btn-success mybuttonlinks" >
+                    Fill Ups</button></a>
+                </div>
+            </div>
+        </div>
+        
+
+    <div class="col-md-8">
+        <div class="card">
+            <div id="allif-section-headers" class="card-header">
+             
+              <a  href="{% url 'logistics:logistics-dashboard' %}">
+                <button id="allif-link-buttons" type="button" class="btn btn-success mybuttonlinks" >
+                Dashboard</button></a>
+            
+            </div>
+            <div class="col-md-12">
+        
+
+        <!--end of table-->
+            </div>
+        </div></div></div>
+        <!-- end of first row-->
+</div><!--end of main container of the page-->
+
+   {% endblock %}
+ 
+
+      
+
+
+
+
+
+
+
+
+
+
+
+

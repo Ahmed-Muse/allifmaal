@@ -1,0 +1,29 @@
+
+<DOCTYPE html>
+    
+    <head> 
+        <title>
+            {% block title %}
+           
+            {% endblock %}
+        </title>
+
+        {% block style %}
+        {% endblock %}
+ 
+    </head>
+
+    <body>
+    
+        {% include 'allifmaalapp/bases/topnavbar.html' %}
+        {% include 'allifmaalapp/bases/sidenavbar.html' %}
+        
+        {% block body %}
+
+        {% endblock %}
+        
+    </body>
+<html>
+
+
+     

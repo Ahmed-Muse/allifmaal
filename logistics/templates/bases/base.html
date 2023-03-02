@@ -1,0 +1,28 @@
+
+<DOCTYPE html>
+    
+    <head> 
+        <title>
+            {% block title %}
+            {% endblock %}
+        </title>
+
+        {% block style %}
+        {% endblock %}
+ 
+    </head>
+
+    <body>
+    
+        {% include 'bases/log-topnavbar.html' %}
+        {% include 'bases/log-sidenavbar.html' %}
+        
+        {% block body %}
+
+        {% endblock %}
+        
+    </body>
+<html>
+
+
+     

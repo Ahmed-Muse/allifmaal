@@ -1,0 +1,105 @@
+
+{% extends 'dashboard/stock-base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block style %}
+
+{% endblock %}
+
+{% block title %}
+{{trans_or}}
+{%endblock%}
+
+{% block info %}
+
+<a href="{% url 'stockmanagementapp:stock-dashboard' %}">
+    <button class="btn btn-success">Dashboard</button>
+</a>
+
+<a href="{% url 'logistics:alwen_jobs_list' %}">
+    <button class="btn btn-success">Jobs</button>
+</a>
+
+
+<a href="{% url 'logistics:alwen_job_invoice_pdf' my_job_id.id %}">
+  <button class="btn btn-success">Invoice pdf</button>
+</a>
+
+
+{% endblock %}
+
+{% block leftsection %}
+
+<form method='POST' action=''>{% csrf_token %}
+    {{form}}
+    
+              
+    <input type="submit" value='    Add   ' class="btn btn-success btn-block">
+<br>
+
+{{my_job_id}}
+
+{% endblock %}
+
+{% block header %}
+{{trans_or}}
+{% endblock %}
+
+{% block body %}
+
+
+<table class="table">
+  <thead>
+    <tr>
+      
+      <th scope="col">Item</th>
+      <th scope="col">Quantity</th>
+      <th scope="col"> Unit Cost</th>
+      <th scope="col" style="background-color: rgb(250, 197, 184); padding-right: 10px;"> Line Cost</th>
+      <th scope="col"> Unit Price</th>
+      <th scope="col" style="background-color: rgb(12, 177, 1);"> Selling Price</th>
+
+      
+     
+      
+     
+    </tr>
+  </thead>
+  <tbody id="tbody">
+    
+    {% for item in job_Items %}
+    <tr>
+
+      <td>{{item.description}}</td>
+      <td>{{item.quantity}}</td>
+      <td>{{item.unit_cost}}</td>
+      <td style="background-color: rgb(250, 197, 184);">{{item.linecost}}</td>
+      <td>{{item.unit_price}}</td>
+      <td style="background-color: rgb(12, 177, 1);padding-right: 10px;">{{item.mylineamount}}</td>
+      
+      
+    </tr>
+    
+    {% endfor %}
+    
+  </tbody>
+  
+</table>
+<tr><h4 >Grand Total: {{invoiceTotal}}</h4></tr>
+  
+<tr><h4 style="color: red;">Grand Cost: {{total_cost}}</h4></tr>
+<tr><h4 style="color: red;">Gross Profit: {{gross_profit}}</h4></tr>
+<tr><h4 style="color: red;">Profit % : {{profit_percentage }}</h4></tr>
+   
+      
+     
+{% endblock %}
+
+{% block main %}
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+

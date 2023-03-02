@@ -1,0 +1,332 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Job invoice pdf</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!--shaafi invoice pdf-->
+    <style>
+        body{
+            background-color: white; 
+            margin: 0;
+            padding: 0;
+        }
+        h3{
+          font-family: 'Times New Roman', Times, serif;
+        }
+       
+        .body-section{
+            padding: 16px;
+            border: 1px solid white;
+            border-radius: 10px 20px;
+        }
+        table{
+            background-color: #fff;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        table td {
+            vertical-align: middle !important;
+            text-align: left;
+            margin-left: 3px;
+            padding-left: 3px;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 15px;
+        }
+        table th, table td {
+            padding-top: 02px;
+            padding-bottom: 05px;
+        }
+        .table-bordered{
+            box-shadow: 0px 0px 5px 0.5px green;
+            background-color: #fcf8f8;
+        }
+        .table-bordered td, .table-bordered th {
+            border: 1.5px solid #8dd3ee;
+        }
+        .text-right{
+            text-align: left;
+        }
+        .table-header-row{
+            
+            background-color:rgb(226, 211, 211);
+        }
+        .float-right{
+            float: right;
+        }
+        .test{
+          border-radius: 2px;
+          border: 2px solid #8dd3ee;
+          width: 5px;
+          height: 20px;
+
+        }
+        .Allifmaal-details{
+          border: 1px;
+          word-spacing: normal;
+          letter-spacing: normal;
+          line-height: 0px;
+          font-family: 'Times New Roman', Times, serif;
+          font-size: 14px;
+          margin-top: 0px;
+          font-weight: normal;
+          
+        }
+        th{
+          border:none;
+          text-align: left;
+        
+        }
+        table thead tr{
+          border: none;
+        }
+        .invoice-details{
+          line-height: 0px;
+          margin-left: 3px;
+          padding-left: 3px;
+          margin-top: -5px;
+          
+        }
+        
+
+
+div.invoice-ribbon {
+	text-align:left;
+  -ms-transform: rotate(-10deg);
+
+	padding:3px 0;
+	left:-5px;
+	top:11px;
+	width:120px;
+  transform: rotate(-150deg);
+  transform: translateY(0.125em);
+
+	font-size:25px;
+	color:green;
+  float: left;
+  font-family:'Times New Roman', Times, serif
+}
+.expert{
+  text-align: right;
+ 
+}
+.table-header-row{
+  margin-left: 3px;
+  padding-left: 3px;
+}
+.customer-details{
+  background-color: white;
+  margin-left: 3px;
+  padding-left: 3px;
+ 
+}
+tr.row1{
+  background-color: white;
+  
+}
+.footer{
+  height: 100px; 
+    width:100%;
+    position: absolute;
+    left: 0;
+    bottom: 0; 
+}
+
+    </style>
+
+
+  
+</head>
+<body>
+ 
+  <table class="Allifmaal-details">
+    <thead>
+      <tr>
+        <th>
+          {% for info in alwenco %}
+          <div style="width: 180px; max-height: 120px;">
+          <img src="{{info.logo.path}}">
+          
+          </div>
+         
+         
+        </th>
+        <th>
+         <li> Address: Westlands</li>
+          <li>Phone: 0723973992 </li>
+         <li>E-mail: arnold.kip@alwen.com</li>
+         <li>Website: www.alwen.com </li>
+        </th>
+        {% endfor%}
+        
+        <div class="expert">
+        <th>
+          
+          <li>Logistics</li>
+          <li>Travel</li>
+          <li>Relocations</li>
+          <li>Consultancy</li>
+          
+         
+        </th>
+        </div>
+      </tr>
+    </thead>
+  </table>
+
+    <table class="table-bordered">
+        <tr style="background-color: #CCCCCC;">
+          <th colspan="3" style="height: 30px; font-size: 120px; margin-left: 2px;padding-left: 2px;padding-top: 6px; padding-bottom: 0px;">
+               Customer</th>
+          <th colspan="2" style="height: 30px; font-size: 120px;margin-left: 2px;padding-left: 2px;padding-top: 6px; padding-bottom: 0px;"> 
+           Invoice</th>
+          <th  style="height: 30px; font-size: 120px;margin-left: 2px;padding-left: 2px;padding-top: 6px; padding-bottom: 0px;">
+           Details</th>
+        </tr>
+        <tr>
+               
+            <th colspan="3"  class="customer-details">
+              <br>
+             <li>Client:  {{my_job_id.customer}} 
+               
+             </li> 
+             <li>Phone: {{my_job_id.customer.phone}}</li> 
+              <li>Address: {{my_job_id.customer.address}}</li>
+              <li>
+                Operator: {{my_job_id.operator}}
+                    </li>
+             
+
+            </th>
+            
+            <th colspan="2" class="invoice-details" style="background-color: white;"> 
+              <li>
+                {% if my_job_id.status == 'open' %}
+                      
+                  <h6 class="invoice-ribbon" style="color: black;"><strong>Status: Open</strong></h6>
+                  {% else %}
+                  <h6 class="invoice-ribbon" style="color: black;"><strong>Status: Completed</strong></h6>
+                                    {% endif %}
+                                    </li>
+                                    
+               <li>Job Ref: {{my_job_id.job_number}}</li>
+                  <li>             
+                Status:{{my_job_id.status}}</li>
+                <li>
+                Vehicle: {{my_job_id.vehicle}}</li>
+                 <li>
+                Description: {{my_job_id.description}}
+                    </li>
+                    <li>
+                        Starting Mileage: {{my_job_id.starting_odometer}}
+                            </li>
+                            <li>
+                                Ending Mileage: {{my_job_id.ending_odometer}}
+                                    </li>
+                    <li>
+                Comments:{{my_job_id.comments}}
+                </li>
+                
+            </th>
+             
+            <th class="customer-details" style="margin-top: 0px; padding-top: 10px;vertical-align: top;">
+              <li>{{invoice_details.date}}</li>
+              <li>
+                {{system_user}}
+              </li>
+              <li>
+                {{my_job_id.opened_date}}
+              </li>
+
+              
+            </th>
+          </tr>
+          
+        <tr>
+			      <thead>
+			        <tr>
+			         
+			          <th class="table-header-row">Item</th>
+                      <th class="table-header-row">Quantity</th>
+			          
+			          <th class="table-header-row">Unit Cost</th>
+			          <th class="table-header-row">Linecost</th>
+                      <th class="table-header-row">Unit price</th>
+                      <th class="table-header-row">Selling price</th>
+			        </tr>
+			      </thead>
+			      <tbody>
+                    {% for item in job_Items %}
+                    <tr>
+
+                        <td>{{item.description}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{item.unit_cost}}</td>
+                        <td >{{item.lineamount}}</td>
+                        <td>{{item.unit_price}}</td>
+                        <td >{{item.sellingamount|floatformat:2}}</td>
+                        
+                        
+                      </tr>
+                    {% endfor %}
+                    
+                    <tr>
+                        <td colspan="3" class="text-right"><h6 style="text-align: left;">Totals</h6></td>
+                        
+                          
+                          <td ><h6>{{total_cost|floatformat:2}}</h6></td>
+                          <td>.</td>
+                          
+                          <td><h6>{{invoiceTotal|floatformat:2}}</h6></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="text-right"><h6>Profit</h6></td>
+                        <td> <h6>{{gross_profit|floatformat:2}}</h6> </td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="text-right"><h6>Profit %</h6></td>
+                        <td> <h6>{{profit_percentage|floatformat:2}}</td></h6>
+                    </tr>
+			       </tbody>
+             
+            
+              
+            
+			    </table>
+
+			</div>
+
+
+		  </div>
+		</div>
+	</div>
+</div>
+</div>
+<br>
+       
+</div>
+<h4>With many thanks</h4>
+<h4 >Salesperson: <strong> {{system_user}}</strong></h4>
+
+<br>
+
+<div class="body-section">
+    
+      <a href="https://www.alwen.com/" class="float-right">www.alwen.com</a>
+    
+   
+</div>      
+</div> 
+
+</body>
+</html>
+
+
+
+
+
+         

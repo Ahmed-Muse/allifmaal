@@ -1,0 +1,191 @@
+{% extends 'invoices/base_invoice.html'%}
+{% load static %}
+{% block body %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+
+    <link href="{% static 'css/dashboard_css/bootstrap.min.css' %}" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"/>
+    
+    <link href="{% static 'css/dashboard_css/dataTables.bootstrap5.min.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/dashboard_css/style.css' %}" rel="stylesheet">
+    
+   
+    <style>
+        
+        .offcanvas{
+            background-color: #063852;
+        }
+        .card{
+            background-color: #17a2b8;
+            
+            box-shadow: 10 4px 8px 0 rgba(0,0,0,0.5),
+            0 6px 20px 0 rgba(0,0,0,0.39);
+
+            margin-bottom : 5%;
+            border-radius: 20px;
+            padding : 2%;
+            overflow: auto;
+            resize: both;
+            text-overflow: ellipsis;
+        }
+        .cardchart{
+            background-color: white;
+        }
+    </style>
+  
+   
+    <!-- offcanvas -->
+    <main >
+        <div class="container-fluid">
+          <div class="row">
+           
+         
+            <div class="col-md-12 mb-3" >
+              <div class="card" style="background-color: #17a2b8;">
+                <div class="card-header" style="background-color: white;">
+                  <span><i class="bi bi-table me-2" ></i></span> Data Table
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table
+                      id="example"
+                      class="table table-striped data-table"
+                      style="width: 100%"
+                    >
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Position</th>
+                          <th>Office</th>
+                          <th>Age</th>
+                          <th>Start date</th>
+                          <th>Salary</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Ahmed Muse</td>
+                          <td>System Architect</td>
+                          <td>Nairobi</td>
+                          <td>33</td>
+                          <td>02/03/2018</td>
+                          <td>$600</td>
+                        </tr>
+                        <tr>
+                          <td>Hawa Osman</td>
+                          <td>Accountant</td>
+                          <td>Nairobi</td>
+                          <td>63</td>
+                          <td>03/04/2018</td>
+                          <td>$600</td>
+                        </tr>
+                        <tr>
+                          <td>Ali Muse</td>
+                          <td>CEO</td>
+                          <td>Ontarion</td>
+                          <td>50</td>
+                          <td>05/05/2001</td>
+                          <td>$1000</td>
+                        </tr>
+                        <tr>
+                          <td>Abdulkadir Muse</td>
+                          <td>JS Developer</td>
+                          <td>Minnesota</td>
+                          <td>46</td>
+                          <td>10/10/2002</td>
+                          <td>$1200</td>
+                        </tr>
+                        <tr>
+                          <td>Hani Muse</td>
+                          <td>Accountant</td>
+                          <td>Seatle</td>
+                          <td>37</td>
+                          <td>2008/11/28</td>
+                          <td>$800</td>
+                        </tr>
+                        <tr>
+                          <td>Abdullahi Muse</td>
+                          <td>Marketer</td>
+                          <td>Guriceel</td>
+                          <td>28</td>
+                          <td>2012/12/02</td>
+                          <td>$700</td>
+                        </tr>
+                        <tr>
+                          <td>Abdirashid Ishaq</td>
+                          <td>Sales Assistant</td>
+                          <td>Nairobi</td>
+                          <td>20</td>
+                          <td>2012/08/06</td>
+                          <td>$500</td>
+                        </tr>
+                        <tr>
+                          <td>Abdishakur Mohamed</td>
+                          <td>Integration</td>
+                          <td>Mogadishu</td>
+                          <td>22</td>
+                          <td>2019/10/14</td>
+                          <td>$550</td>
+                        </tr>
+                        <tr>
+                          <td>Omar Muse</td>
+                          <td>Bandwidth</td>
+                          <td>Mombasa</td>
+                          <td>39</td>
+                          <td>2009/09/15</td>
+                          <td>$900</td>
+                        </tr>
+                        <tr>
+                            <td>Mohamed Omar</td>
+                            <td>Bandwidth</td>
+                            <td>Mombasa</td>
+                            <td>18</td>
+                            <td>2009/09/15</td>
+                            <td>$900</td>
+                          </tr>
+                          <tr>
+                            <td>Fardowsa Omar</td>
+                            <td>Bandwidth</td>
+                            <td>Mombasa</td>
+                            <td>19</td>
+                            <td>2009/09/15</td>
+                            <td>$900</td>
+                          </tr>
+                       
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th>Name</th>
+                          <th>Position</th>
+                          <th>Office</th>
+                          <th>Age</th>
+                          <th>Start date</th>
+                          <th>Salary</th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+      <script src="{% static 'js/dashboard_js/bootstrap.bundle.min.js' %}"></script><!--not necessary-->
+      
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+      <script src="{% static 'js/dashboard_js/jquery-3.5.1.js' %}"></script>
+      
+      <script src="{% static 'js/dashboard_js/jquery.dataTables.min.js' %}"></script>
+      <script src="{% static 'js/dashboard_js/dataTables.bootstrap5.min.js' %}"></script>
+      
+      <script src="{% static 'js/dashboard_js/script.js' %}"></script>
+  
+    {% endblock %}

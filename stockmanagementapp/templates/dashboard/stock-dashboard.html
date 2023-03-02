@@ -1,0 +1,575 @@
+{% extends 'bases/stock-base.html'%}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+Dashboard
+{% endblock %}
+{% block style %}
+   
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+<!--FontAwesome CDN ...necessary for the icons-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+    integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+
+<script src="{% static 'js/chart.min.js' %}">/*Remember that this is a dist file.... source is: 
+https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js*/
+
+</script>
+<!--Chartjs CDN-->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
+<style>
+    /* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {}
+
+/* .............. note that 1cm = 37.8px.....................*/
+
+  
+    body {
+        /*background-color: #F6F7F8;*/
+        font-size: 2rem;
+        opacity: 1;
+        position:sticky;
+        overflow: auto;
+        text-align: left;
+        max-width: 100%; 
+
+        /*start of setting up the background image*/
+        background-image: url('{% static "images/whiteback2.jpg" %}')  ; /*....#F6F7FA....*/
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: left;
+        opacity: 1;
+        padding-left: 10px;
+        padding: auto;
+        /*end of setting up the background image*/
+    }
+   
+    .container{
+      background-color: #F6F7F8;
+      }
+    .container tr:hover {
+      background-color: #FFF;
+      color: black;
+    }
+    table{
+      background-color: #F6F7F8;
+    }
+.mybuttonlinks{
+    margin-top: 7px; margin-left: 7px;
+    margin-bottom: 5px;
+ 
+}
+.container tr{
+    border: 1px solid black;
+}
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:200px) and (max-width:800px) {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+        .container {
+            
+            margin-top: 110px;
+            /*display: inline-block;
+            overflow: auto;*/
+            font-size: 0.95rem;
+           
+            
+            color:black;
+            overflow: auto;
+            overflow-x: scroll;
+            overflow-y: scroll;
+            height: 480px;
+          
+        }
+        .mycomments{
+          display: none;
+        }
+       
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+
+  
+ 
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:800px) and (max-width:1000px) {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+        .container{
+            
+            /*display: inline-block;
+            overflow: auto;*/
+            font-size: 0.95rem;
+           
+            margin-top: 8px;
+            margin-left: auto;
+            padding-left: 90px;
+            
+           
+            
+            
+        }
+        
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+
+ 
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:1000px) and (max-width:2000px) {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+        .container {
+            
+            margin-top: 10px;
+            display: block;
+           
+            font-size: 0.95rem;
+            
+            margin-left:auto ;
+            
+            margin-right: auto;
+            margin: auto;
+            padding-left: 90px;
+            
+            
+          
+        }
+        
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:2000px)  {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+       .container {
+            
+            margin-top: 10px;
+            display: block;
+            overflow: auto;
+            font-size: 1.00rem;
+            
+            margin-left: 120px;
+            overflow-x: hidden;
+            margin-right: 20px;
+            
+          
+        }
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+ 
+    </style>
+   {%endblock%}
+   
+   {% block body %}
+ 
+<div class="container"><!--start of main container of the page--...#17a2b8;  -->
+
+    <!--start of first row-->
+    <div class="row mt-4" >
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header text-white" style="background-color:#FF7722;">
+                   Quick Links
+                </div>
+                <div >
+                    
+                <a  href="{% url 'stockmanagementapp:allif_invoices_list' %}">
+                    <button type="button" class="btn btn-success mybuttonlinks ">
+                        Invoices</button></a>
+                   
+                    </div>
+
+                    <div class="row mt-4" >
+                    <div class="col-md-6"> 
+                        <a class="text-decoration-none text-dark" href="">
+                            <div class="card my-card shadow text-center p-3">
+                            <h6><i class="fas fa-dollar-sign"></i></h6>
+                                <small>Invoices </small>
+                            </div></a></div>
+
+
+                            <div class="col-md-6"> 
+                                <a class="text-decoration-none text-dark" href="">
+                                    <div class="card my-card shadow text-center p-3">
+                                       <h6><i class="fas fa-users"></i></h6>
+                                        <small>Users</small>
+                                    </div></a></div>
+
+                                    </div>
+
+                <div class="row mt-4" >
+                    <div class="col-md-6"> 
+                        <a class="text-decoration-none text-dark" href="">
+                            <div class="card my-card shadow text-center p-3">
+                            <h6><i class="fas fa-dollar-sign"></i></h6>
+                                <small>Invoices </small>
+                            </div></a></div>
+
+
+                <div class="col-md-6"> 
+                    <a class="text-decoration-none text-dark" href="">
+                        <div class="card my-card shadow text-center p-3">
+                        <h6><i class="fas fa-users"></i></h6>
+                            <small>Users</small>
+                        </div></a></div>
+
+            </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header text-white" style="background-color: #FF7F50;">
+                    Payments
+                </div>
+                
+
+                <div class="col-md-12">
+                    <div class="column" style="background-color:#F6F7F8;">
+                      
+                      <canvas id="myChart3" width="400" height="300"></canvas>
+                              <script>
+                                  var ctx3 = document.getElementById('myChart3').getContext('2d');
+                                  var myChart3 = new Chart(ctx3, {
+                                      type: 'doughnut',
+
+                                      data: {
+                                        labels: [{% for items in payments %} '{{items.customer}}', {% endfor %}],
+
+                                          datasets: [{
+                                            
+                                              label: 'Amount',
+                                              data: [{% for items in payments %} {{items.amount}}, {% endfor %}],
+                                              backgroundColor: [
+                                                  'rgba(255, 99, 132, 1)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgba(255, 206, 86, 1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgba(255, 159, 64, 1)',
+                                                  'rgba(255, 99, 132, 1)',
+                                                  '#f8912ab',
+                                              ],
+                                              borderColor: [
+                                                  'rgba(255, 99, 132, 1)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgba(255, 206, 86, 1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgba(255, 159, 64, 1)',
+                                                  'rgba(255, 159, 64, 1)',
+                                                  'rgba(255, 159, 64, 1)',
+                                                  'rgba(255, 159, 64, 1)',
+                                              ],
+                                              borderWidth: 1
+                                          }]
+                                      },
+                                      options: {
+                                          scales: {
+                                              yAxes: [{
+                                                  ticks: {
+                                                      beginAtZero: true
+                                                  }
+                                              }]
+                                          }
+                                      }
+                                  });
+                              </script>
+                    </div>
+                    </div>
+                    </div></div>
+
+                    <div class="col-md-4">
+                    <div class="card">
+                    <div class="card-header text-white" style="background-color: #FF7F50;">
+                    Expenses
+                    </div>
+                    
+                        <div class="column" style="background-color:#F6F7F8;">
+                          
+                          <canvas id="myChart5" width="150" height="100"></canvas>
+                                  <script>
+                                      var ctx5 = document.getElementById('myChart5').getContext('2d');
+                                      var myChart5 = new Chart(ctx5, {
+                                          type: 'bar',
+                                          data: {
+                                              labels: [{% for items in expenses %} '{{items.description}}', {% endfor %}],
+                                              datasets: [{
+                                                  label: '# of Votes',
+                                                  data: [{% for items in expenses %} {{items.amount}}, {% endfor %}],
+                                                  backgroundColor: [
+                                                      'rgba(255, 99, 132, 1)',
+                                                      'rgba(54, 162, 235, 1)',
+                                                      'rgba(255, 206, 86, 1)',
+                                                      'rgba(75, 192, 192, 1)',
+                                                      'rgba(153, 102, 255, 1)',
+                                                      'rgba(255, 159, 64, 1)',
+                                                      'rgba(255, 99, 132, 1)',
+                                                      '#f8912ab',
+                                                  ],
+                                                  borderColor: [
+                                                      'rgba(255, 99, 132, 1)',
+                                                      'rgba(54, 162, 235, 1)',
+                                                      'rgba(255, 206, 86, 1)',
+                                                      'rgba(75, 192, 192, 1)',
+                                                      'rgba(153, 102, 255, 1)',
+                                                      'rgba(255, 159, 64, 1)'
+                                                  ],
+                                                  borderWidth: 1
+                                              }]
+                                          },
+                                          options: {
+                                              scales: {
+                                                  yAxes: [{
+                                                      ticks: {
+                                                          beginAtZero: true
+                                                      }
+                                                  }]
+                                              }
+                                          }
+                                      });
+                                  </script>
+                        </div>
+                        </div>
+
+            </div></div>
+
+            <!--end of first row-->
+
+            <!--start of second row-->
+
+            
+    <div class="row mt-12" >
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header text-white" style="background-color: #FF7F50;">
+                   Customers
+                </div>
+                <div>
+               
+                    </div>
+            
+
+
+                    <!--start of the scrollable table section-->
+<div style="margin-top: 20px;">
+
+    <style>
+        .Allifmaal-scroll-table{
+          background-color: #F6F7F8;
+          width: auto;
+          height: 250px;
+          
+          overflow-x: scroll;
+          overflow-y: scroll;
+          margin-left: 2px;
+          overflow: auto;
+          margin-right: 1px;
+        }
+        </style>
+       
+       
+        <div class="Allifmaal-scroll-table" style="text-align: center;">
+
+            <table class="table">
+                <thead>
+                  <tr>
+                     
+                      <th>Customer</th>
+                      <th>Phone</th>
+                  
+                  </tr></thead>
+                  <tbody>
+                      {% for item in customers %}
+                    <tr>
+                      
+                      <td>{{item.clientName|truncatechars:15}}</td>
+                      <td>{{item.phoneNumber}}</td>
+                     
+                      
+                    </tr>
+                   
+                    {% endfor %}
+                  </tbody>
+                </table>
+       
+        </div>
+        <!--end of the scrollable table section-->
+        </div>
+
+
+            </div>
+
+        </div>
+        
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header text-white" style="background-color: #FF6700;">
+                Assets
+                </div>
+                
+
+                <div class="col-md-12">
+                    <div class="column" style="background-color:#F6F7F8;">
+                      
+                      <canvas id="myChart6" width="150" height="100"></canvas>
+                              <script>
+                                  var ctx6 = document.getElementById('myChart6').getContext('2d');
+                                  var myChart6 = new Chart(ctx6, {
+                                      type: 'line',
+                                      data: {
+                                          labels: [{% for items in assets %} '{{items.description}}', {% endfor %}],
+                                          datasets: [{
+                                              label: '# of Votes',
+                                              data: [{% for items in assets %} {{items.value}}, {% endfor %}],
+                                              
+                                              borderColor: [
+                                                  'rgba(255, 99, 132, 1)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgba(255, 206, 86, 1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgba(255, 159, 64, 1)'
+                                              ],
+                                              borderWidth: 1
+                                          }]
+                                      },
+                                      options: {
+                                          scales: {
+                                              yAxes: [{
+                                                  ticks: {
+                                                      beginAtZero: true
+                                                  }
+                                              }]
+                                          }
+                                      }
+                                  });
+                              </script>
+                    </div>
+                    </div>
+                    </div></div>
+
+                    <div class="col-md-4">
+                    <div class="card">
+                    <div class="card-header text-white" style="background-color: #FF5F1F;">
+                    Quotes
+                    </div>
+                    
+                        <div class="column" style="background-color:#F6F7F8;">
+                          
+                          <canvas id="myChart7" width="150" height="100"></canvas>
+                                  <script>
+                                      var ctx7 = document.getElementById('myChart7').getContext('2d');
+                                      var myChart7 = new Chart(ctx7, {
+                                          type: 'pie',
+                                          data: {
+                                              labels: [{% for items in assets %} '{{items.description}}', {% endfor %}],
+                                              datasets: [{
+                                                  label: '# of Votes',
+                                                  data: [{% for items in assets %} {{items.value}}, {% endfor %}],
+                                                  backgroundColor: [
+                                                      'rgba(255, 99, 132, 1)',
+                                                      'rgba(54, 162, 235, 1)',
+                                                      'rgba(255, 206, 86, 1)',
+                                                      'rgba(75, 192, 192, 1)',
+                                                      'rgba(153, 102, 255, 1)',
+                                                      'rgba(255, 159, 64, 1)',
+                                                      'rgba(255, 99, 132, 1)',
+                                                      '#f8912ab',
+                                                  ],
+                                                  borderColor: [
+                                                      'rgba(255, 99, 132, 1)',
+                                                      'rgba(54, 162, 235, 1)',
+                                                      'rgba(255, 206, 86, 1)',
+                                                      'rgba(75, 192, 192, 1)',
+                                                      'rgba(153, 102, 255, 1)',
+                                                      'rgba(255, 159, 64, 1)'
+                                                  ],
+                                                  borderWidth: 1
+                                              }]
+                                          },
+                                          options: {
+                                              scales: {
+                                                  yAxes: [{
+                                                      ticks: {
+                                                          beginAtZero: true
+                                                      }
+                                                  }]
+                                              }
+                                          }
+                                      });
+                                  </script>
+                        </div>
+                        </div>
+
+            </div></div>
+            <!--end of second row-->
+            <hr>
+
+            <h5> add the following main...have the main four...SRM, HRM, CRM and FM </h5>
+        <li>invoicing</li>
+        <li>CRM</li>
+        <li>Finance...customer debt, statements, purchases invoices etc</li>
+        <li>Reporting...purchases orders, receipts, stock, etc</li>
+        <p>when you are adding stock items either individually or large quantities like excel, then the cost of each item should be captured</p>
+        NB. From D365, when you post a purchase order, it becomes a purchase receipt ...then receive the purchse recept and the items should
+        come to stock...ie only after receving will item quantities change... there is also purchase invoice
+        <p>the purchase order has a tab called landed costs whre all other miscelenous costs like freight and taxes are attached/pegged....
+            just the way you attach invoice to a customer...to now calculate the total cost, you should aportion the miseclenous costs to each
+            item and then add to its buying price... to get now the selling price, take gross cost and multipy the uplift...
+        </p>
+        <p>for the uplift, what if you create another field in the po for the uplift and mulitpy all the items to that figure inserted in the uplift field
+            ....that is assuming all the items will be acquired through a po...
+        </p>
+        when dealing with pricing, consider the FOB price, landing ratio (freight and taxes, loading, unloading etc) and your margin
+        <p>
+            gross cost = FOB unit cost or price x landed cost or ratio x exch rate
+            selling price = gross cost x uplift...
+            <p>price simulation... is done used on vendor and item categories</p>
+        </p>
+        consider a case where you buy two items...item 1 costs $200 while item 2 costs $300...the freight to bring these two items
+        is $50...now to get the total specific unit cost, we need to abortion the freight cost to various items in the same PO...
+        Therefore, total unit cost is unit cost + (unit cost/total cost of all items)xfreight
+        <p>item 1 cost is = 200+ (200/(200+300))*50 = 200+20 = $220...assuming quantity is one</p>
+        <p>item 2 cost is = 300+ (300/(200+300))*50 = 300+30 = $330</p>
+        <p>now to sell an item, you just then multipty the uplift...this uplift is in the PO and in the case of the item adding indivually,
+            there should field for it.
+        </p>
+        <p>
+            lets say you have the same above two items but each quantities is 2 meaning total amount paid for them is 200x2 + 300x2 = 1000
+            lets also say the freight remains $50... 200x2 + (200x2/400+600)*50=400+20=420 for the two items...meaning each item costs 4420/quantity
+        </p>
+        
+    
+</div><!--end of main container of the page-->
+
+
+   {% endblock %}
+
+        
+    

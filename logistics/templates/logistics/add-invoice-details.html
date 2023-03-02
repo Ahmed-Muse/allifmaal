@@ -1,0 +1,367 @@
+{% extends 'bases/base.html'%}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+   
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+<!--FontAwesome CDN ...necessary for the icons-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+    integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+
+<script src="{% static 'js/chart.min.js' %}">/*Remember that this is a dist file.... source is: 
+https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js*/
+
+</script>
+<!--Chartjs CDN-->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
+<!--this is important for the date picker-->
+<link href="{% static 'js/jquery-ui-1.12.1/jquery-ui.min.css' %}" rel="stylesheet">
+<link href="{% static 'js/jquery-ui-1.12.1/jquery-ui.structure.min.css' %}" rel="stylesheet">
+<link href="{% static 'js/jquery-ui-1.12.1/jquery-ui.theme.min.css' %}" rel="stylesheet">
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+<script src="{% static 'js/myjs.js' %}"></script>
+<!--end of date picker-->
+
+<style>
+    /* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {}
+
+/* .............. note that 1cm = 37.8px.....................*/
+
+  
+    body {
+        /*background-color: #F6F7F8;*/
+        font-size: 2rem;
+        opacity: 1;
+        position:sticky;
+        overflow: auto;
+        text-align: left;
+        max-width: 100%; 
+        background-color: #F6F7F8;
+        margin: auto;
+        padding: auto;
+        
+
+    }
+   
+    .container{
+      background-color: #F6F7F8;
+      }
+    .container tr:hover {
+      background-color: #FFF;
+      color: black;
+    }
+    table{
+      background-color: #F6F7F8;
+    }
+.mybuttonlinks{
+    margin-top: 7px; margin-left: 7px;
+    margin-bottom: 5px;
+ 
+}
+#allif-section-headers{
+    background-color: #e9eaec;
+    color: black;
+    font-size: 16px;
+    text-align: center;
+}
+#allif-link-buttons{
+    background-color: #F6F7F8;
+    color: black;
+}
+#allif-link-buttons:hover {
+    background-color: #714b67;
+    color: white;
+}
+
+
+
+.Allifmaal-scroll-table{
+    background-color: #F6F7F8;
+    width: auto;
+    height: 250px;
+
+    overflow-x: scroll;
+    overflow-y: scroll;
+    margin-left: 2px;
+    overflow: auto;
+    margin-right: 1px;
+}
+                      
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:200px) and (max-width:800px) {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+        .container {
+            
+            margin-top: 110px;
+            /*display: inline-block;
+            overflow: auto;*/
+            font-size: 0.95rem;
+           
+            
+            color:black;
+            overflow: auto;
+            overflow-x: scroll;
+            overflow-y: scroll;
+            height: 480px;
+          
+        }
+        .mycomments{
+          display: none;
+        }
+       
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+
+  
+ 
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:800px) and (max-width:1000px) {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+        .container{
+            
+            /*display: inline-block;
+            overflow: auto;*/
+            font-size: 0.95rem;
+           
+            margin-top: 8px;
+            margin-left: auto;
+            padding-left: 90px;
+            
+        }
+        
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+
+ 
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:1000px) and (max-width:2000px) {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+        .container {
+            
+            margin-top: 10px;
+            display: block;
+           
+            font-size: 0.95rem;
+            
+            margin-left:auto ;
+            
+            margin-right: auto;
+            margin: auto;
+            padding-left: 90px;
+            
+        }
+        
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:2000px)  {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+       .container {
+            
+            margin-top: 10px;
+            display: block;
+            overflow: auto;
+            font-size: 1.00rem;
+            
+            margin-left: 120px;
+            overflow-x: hidden;
+            margin-right: 20px;
+           
+        }
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+ 
+    </style>
+   {%endblock%}
+   
+   {% block body %}
+ 
+<div class="container"><!--start of main container of the page--...#17a2b8;  -->
+
+    <!--start of first row-->
+    <div class="row mt-12" >
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div id="allif-section-headers" class="card-header ">
+                   Quick Links
+                </div>
+                <div >
+                  
+                    
+                <a  href="">
+                    <button id="allif-link-buttons" type="button" class="btn btn-success mybuttonlinks " >
+                        Invoice</button></a>
+                    <a  href="{% url 'logistics:logistics-dashboard' %}">
+                    <button id="allif-link-buttons" type="button" class="btn btn-success mybuttonlinks" >
+                    Dashboard</button></a>
+                   
+
+                    </div>
+
+            </div>
+
+            
+            
+        </div>
+        
+
+    <div class="col-md-8">
+        <div class="card">
+            <div id="allif-section-headers" class="card-header">
+                
+                Invoice: {{my_inv_id}}
+            </div>
+            <div class="col-md-12">
+        <!--start of the table-->
+           
+            <table class="table">
+            <thead>
+            <tr>
+            <th>No.</th>
+            <th>Customer</th>
+            <th>Status</th>
+            <th>Currency</th>
+            
+        
+            </tr>
+        </thead>
+        <tbody>
+    
+    
+        <tr>
+        <td>
+        {{my_inv_id}}
+        
+        </td>
+       <td>
+        {{my_inv_id.customer}}
+       </td>
+      
+       <td>
+        {{my_inv_id.invoice_status}}
+       </td>
+       <td>
+        {{my_inv_id.invoice_currency}}
+       </td>
+              
+    
+        </tr>
+       
+
+        </tbody>
+        </table>
+        
+        <!--end of table-->
+            
+        </div></div></div>
+        <!-- end of first row-->
+
+
+
+    <hr>
+
+    <!--start of first row-->
+    <form method='POST' action=''>{% csrf_token %}
+
+    
+      <!----------------------------------------------start of row----------------------------------------------------->
+      <div class="col-md-12"><!--start of the first row body-->
+       
+              
+          <div class="card-header text-center" >
+              <h5>Add Invoice Details</h5>
+          </div>
+                  
+          <div class="row"><!--start of row div --->
+                  
+              <div class="col-md-4"><!--start of column 1-->
+                  <div class="card my-card shadow text-left p-3">
+                  <label>Customer</label> {{form.customer}} 
+                  <label>Terms</label>{{form.invoice_terms}} 
+                  </div>
+              </div><!--end of column 1-->
+  
+              <div class="col-md-4"><!--start of column 2-->
+                  <div class="card my-card shadow text-left p-3">
+                  <label>Due</label> {{form.invoice_due_Date}} 
+                  <label>Status</label> {{form.invoice_status}}
+                  <label>Posting Status</label>{{form.posting_inv_status}} 
+                  </div>
+              </div><!--end of column 2-->
+  
+              <div class="col-md-4"><!--start of column 3-->
+                  <div class="card my-card shadow text-left p-3">
+                  <label>Currency</label> {{form.invoice_currency}} 
+                  <label>Comments</label> {{form.invoice_comments}} 
+                  </div>
+              </div><!--end of column 1-->
+  
+          </div><!--end of row div --->
+  
+      </div><!--end of first row body-->
+      <!----------------------------------------------end of row----------------------------------------------------->
+  
+  <!-----------------------------------------------start of row ---------------------------------------------------->
+      <div class="col-md-12"><!--start of the second row body-->
+        
+          <div class="row"><!--start of second row div --->
+                  
+              <div class="col-md-4"><!--start of column 1-->
+                  <div class="card my-card shadow text-left p-3">
+                    
+                  <label>Job</label> {{form.job}} 
+                  
+                  </div>
+              </div><!--end of column 1-->
+  
+          </div><!--end of the second row div --->
+  
+      </div><!--end of the second row body-->
+  
+      <!----------------------------------------------end of row---------------------------------------------------->
+  
+      
+      <div style="float: center; text-align: center;">
+      <button class="btn btn-success " type="submit" style="text-align: center; margin:auto; padding: auto; margin-top: 5px;">
+      Update</button>
+      </div>
+             
+      </form>
+
+    <hr>
+      
+</div><!--end of main container of the page-->
+
+   {% endblock %}
+

@@ -1,0 +1,227 @@
+
+{% extends 'dashboard/Allifmaal-main-base.html' %}
+{% load crispy_forms_tags %}
+
+{% block style %}
+
+{% endblock %}
+
+{% block title %}
+
+{%endblock%}
+
+{% block info %}
+<button class="btn btn-success" style="background-color: rgb(255, 255, 255);">
+    <a href="#myModal" data-toggle="modal" data-target="#myModal">Add
+    </a></button>
+{% endblock %}
+
+{% block leftsection %}
+<br>
+
+<a  href="{% url 'logistics:logistics-dashboard' %}">
+    <h5>Dashboard</h5>
+</a>
+     
+{% endblock %}
+{% block body %}
+<!--start of the table-->
+<table class="table">
+    <thead>
+        
+    <tr>
+       
+        <th>Carrier</th>
+        <th>Capacity</th>
+        
+        <th>Unit</th>
+       
+        <th>Update</th>
+        <th>Delete</th>
+       
+        
+    
+    </tr>
+</thead>
+<tbody>
+    {% for carrier in carriers %}
+    
+
+<tr>
+    
+    <td>
+        {{carrier.carrier}}
+        </td>
+        <td>
+            {{carrier.capacity}}
+            </td>
+            <td>
+                {{carrier.unit}}
+                </td>
+                 
+    
+    
+   
+    
+    <td>
+        <a href="{% url 'logistics:update-log-carrier-details' carrier.id %}">
+        Edit
+        </a>
+    </td>
+    <td>
+      <a href="{% url 'logistics:delete-log-carrier' carrier.id %}">
+        Remove
+          </a></td>
+    
+    
+    
+</tr>
+{% endfor %}
+
+</tbody>
+</table>
+<!--end of table-->
+
+{% endblock %}
+
+{% block main %}
+
+<!--start of  modal part-->
+<div class="container">
+  
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+           
+            
+          </div>
+          
+
+          <div class="modal-body ">
+    
+            <!--this is  tag form part-->
+          <form method='POST' action=''>{% csrf_token %}
+    
+    <div class="container">
+        <div class="row mt-12">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+    
+                  Important Information
+                  
+                    </div>
+                    
+          <div class="card-body">      
+          <div class="row mt-4">
+            <div class="col-md-6">
+             
+              {{form.carrier|as_crispy_field}}
+             
+          </div> 
+          </div>
+          
+                    
+                  
+                    <div class="row mt-4">
+                      <div class="col-md-6">
+                        {{form.capacity|as_crispy_field}}
+                        
+                          
+                         </div>
+                        
+                                </div>
+                                </div>
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                {{form.unit|as_crispy_field}}
+                              
+          </div>
+                </div>
+          
+                </div>
+                
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        Item details
+                        
+    
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                  
+                           
+                           
+                                <div class="row mt-4">
+                                  <div class="col-md-6">
+                                    {{form.owner|as_crispy_field}}
+                                      
+                                     </div>
+                                    
+                                            </div> 
+                        
+    
+                          <div class="row mt-4">
+                            <div class="col-md-6">
+                                {{form.phone|as_crispy_field}}
+                              
+                               </div>
+                                 
+                                      </div> 
+                                      <div class="row mt-4">
+                                        <div class="col-md-6">
+                                            {{form.address|as_crispy_field}}
+                                          
+                                           </div>
+                                             
+                                                  </div> 
+                                                  <div class="row mt-4">
+                                                    <div class="col-md-6">
+                                                        {{form.email|as_crispy_field}}
+                                                      
+                                                       </div>
+                                                         
+                                                              </div> 
+                                                 
+                                                              </div> 
+                                                              
+                            
+                        </div>
+                    </div>
+                </div>
+                <br>
+                
+            </div>
+            
+            <div class="modal-footer">
+              
+              <input type="submit" value='    Add   ' class="btn btn-success">
+              <button type="button" class="btn btn-success" data-dismiss="modal">Close</button></div>
+        </div>
+        
+    </div>
+    </div>
+
+
+    </div>
+  </div></div>
+    </div><!--end of modal part-->
+
+{% endblock %}
+
+{% block footer %}
+
+   
+{% endblock %}
+
+                   
+   
+              
+   
+   
+   

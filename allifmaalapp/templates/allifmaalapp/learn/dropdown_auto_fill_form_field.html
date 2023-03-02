@@ -1,0 +1,532 @@
+{% extends 'allifmaalapp/bases/allifbase.html'%}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+   
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+<!--FontAwesome CDN ...necessary for the icons-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+    integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+
+<script src="{% static 'js/chart.min.js' %}">/*Remember that this is a dist file.... source is: 
+https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js*/
+
+</script>
+<!--Chartjs CDN-->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
+<style>
+    /* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {}
+
+/* .............. note that 1cm = 37.8px.....................*/
+
+  
+    body {
+        /*background-color: #F6F7F8;*/
+        font-size: 2rem;
+        opacity: 1;
+        position:sticky;
+        overflow: auto;
+        text-align: left;
+        max-width: 100%; 
+        background-color: #F6F7F8;
+        margin: auto;
+        padding: auto;
+        
+
+    }
+   
+    .container{
+      background-color: #F6F7F8;
+      }
+    .container tr:hover {
+      background-color: #FFF;
+      color: black;
+    }
+    table{
+      background-color: #F6F7F8;
+    }
+.mybuttonlinks{
+    margin-top: 7px; margin-left: 7px;
+    margin-bottom: 5px;
+ 
+}
+#allif-section-headers{
+    background-color: #e9eaec;
+    color: black;
+    font-size: 16px;
+    text-align: center;
+}
+#allif-link-buttons{
+    background-color: #F6F7F8;
+    color: black;
+}
+#allif-link-buttons:hover {
+    background-color: #714b67;
+    color: white;
+}
+
+
+a:link{
+  text-decoration: none;
+  
+}
+       
+                      
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:200px) and (max-width:800px) {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+        .container {
+            
+            margin-top: 110px;
+            /*display: inline-block;
+            overflow: auto;*/
+            font-size: 0.95rem;
+           
+            
+            color:black;
+            overflow: auto;
+            overflow-x: scroll;
+            overflow-y: scroll;
+            height: 480px;
+          
+        }
+        .mycomments{
+          display: none;
+        }
+       
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+
+  
+ 
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:800px) and (max-width:1000px) {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+        .container{
+            
+            /*display: inline-block;
+            overflow: auto;*/
+            font-size: 0.95rem;
+           
+            margin-top: 8px;
+            margin-left: auto;
+            padding-left: 90px;
+            
+        }
+        
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+
+ 
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:1000px) and (max-width:2000px) {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+        .container {
+            
+            margin-top: 10px;
+            display: block;
+           
+            font-size: 0.95rem;
+            
+            margin-left:auto ;
+            
+            margin-right: auto;
+            margin: auto;
+            padding-left: 90px;
+            
+        }
+        
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:2000px)  {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+       .container {
+            
+            margin-top: 10px;
+            display: block;
+            overflow: auto;
+            font-size: 1.00rem;
+            
+            margin-left: 120px;
+            overflow-x: hidden;
+            margin-right: 20px;
+           
+        }
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+ 
+    </style>
+   {%endblock%}
+   
+   {% block body %}
+ 
+<div class="container"><!--start of main container of the page--...#17a2b8;  -->
+
+    <!--start of first row-->
+    <div class="row mt-12" >
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div id="allif-section-headers" class="card-header ">
+                   Quick Links
+            </div>
+              <div >
+                    
+               
+            <a  href="{% url 'logistics:logistics-dashboard' %}">
+            <button id="allif-link-buttons" type="button" class="btn btn-success mybuttonlinks" >
+            Dashboard</button></a>
+          
+            </div>
+           
+
+<!----------------------------------------------start of row----------------------------------------------------->
+<div class="col-md-12"><!--start of the first row body-->
+      <div class="col-md-12"><!--start of column 1-->
+
+        <form method='POST' action=''>{% csrf_token %}
+          <div class="card my-card shadow text-left p-3">
+          <label>Items</label> {{form.items}} 
+          <label>Description</label>{{form.description}}
+          <label>Quantity</label>{{form.quantity}}
+          <label>Price</label>{{form.rate}}
+          <label>Amount</label>{{form.amount}} 
+          </div>
+          <input type="submit" value='Save' class="btn btn-success btn-block">
+        </form>
+
+      </div><!--end of column 1-->
+</div><!--end of first row body-->
+<!----------------------------------------------end of row----------------------------------------------------->
+     
+            </div>
+        </div>
+        
+
+    <div class="col-md-8">
+        <div class="card">
+            <div id="allif-section-headers" class="card-header">
+            Customers
+            </div>
+            <div class="col-md-12">
+        <!--start of the table-->
+            
+            <table class="table">
+            <thead>
+            <tr>
+          
+            <th>Item</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Rate</th>
+            <th>Amount</th>
+            <th>edit</th>
+            <th>delete</th>
+           
+         
+           
+        
+            </tr>
+        </thead>
+        <tbody>
+            {% for learn in learns %}
+             
+
+          <tr>
+            
+              <td>{{learn.items}} </td>
+              <td>{{learn.description}}</td>
+              <td>{{learn.quantity}}</td>
+              <td>{{learn.rate}}</td>
+              <td>{{learn.amount}}</td>
+
+              <td>
+                <a href="{% url 'allifmaalapp:edit_autofill_form_field_when_dropdown' learn.id %}">Edit</a>
+
+              </td>
+              <td>
+                <a href="{% url 'allifmaalapp:delete_autofill_form_field_when_dropdown' learn.id %}">Delete</a>
+
+              </td>
+
+              
+              
+                    
+              
+          </tr>
+          {% endfor %}
+          
+          </tbody>
+          </table>
+
+  
+        <!--end of table-->
+            </div>
+        </div></div></div>
+        <!-- end of first row-->
+
+        <script
+    src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"
+></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"
+></script>
+
+     <hr>
+
+        
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script>
+          
+            $("#id_items").change(function (e) {
+                document.getElementById("AmountID").readOnly= true;
+                document.getElementById("RateID").readOnly = true;
+
+                let selecteditemid= $(this).val();//this gives item id
+
+                let csrf=$("input[name=csrfmiddlewaretoken]").val();
+
+                console.log(`The id is ${selecteditemid}`, `and CSRF Token is ${csrf}`)
+
+                allifmaaldata={
+                    allifidforselecteditem:selecteditemid,
+                    allifcsrfmiddlewaretoken:csrf
+                };
+                
+               $.ajax({
+                    url:"{% url 'allifmaalapp:autofill_form_field_when_dropdown_selected' %}", //behind the scenes run this url
+                    method:"GET",
+                    data:allifmaaldata,//this is the collected data sent to the backend
+                    dataType:"json",
+                   
+                    // start of section that ensures that the data appears on the client side immediately the user adds a record
+                    success:function(allifmaalengdata){
+                
+                    price=allifmaalengdata.unitPrice
+                       
+                    $("#RateID").val(allifmaalengdata.unitPrice);//this autofills the rate field with the value of the price sent from the backend....
+                    
+                    document.getElementById('QuantityID').addEventListener("keyup",function() {
+                    quantity_provided=$(this).val();
+                    document.getElementById('AmountID').value=price*quantity_provided;
+                   
+                    });
+                   }
+                    });
+
+            });
+           
+        
+        </script>
+        <!--end of the important section-->
+
+<form>
+        
+    <div class="form-group">
+        <label for="exampleFormControlSelect1"
+            >Example select</label
+        >
+        <select class="form-control" id="userselect">
+            <option value="1">Ali</option>
+            <option value="2">Omar</option>
+            <option value="3">Diriye</option>
+            <option value="4">Maxamed</option>
+            <option value="5">Yare</option>
+            <option value="6">Keeyga</option>
+        </select>
+    </div>
+
+
+    <div class="form-group">
+        <label for="fn">First Name</label>
+        <input
+            type="text"
+            class="form-control"
+            id="fn"
+            placeholder="firstname"
+            disabled
+        />
+    </div>
+    <div class="form-group">
+        <label for="ln">Last Name</label>
+        <input
+            type="text"
+            class="form-control"
+            id="ln"
+            placeholder="lastname"
+            disabled
+        />
+    </div>
+    <div class="form-group">
+        <label for="emailfield">Email</label>
+        <input
+            type="email"
+            class="form-control"
+            id="emailfield"
+            placeholder="name@example.com"
+            disabled
+        />
+    </div>
+</form> 
+<script>
+    let usersData = [
+        {
+            id: 1,
+            email: "ali@gmail.com",
+            fname: "ali",
+            lname: "muse",
+        },
+        {
+            id: 2,
+            email: "omar@gmail.com",
+            fname: "Omar",
+            lname: "Muse",
+        },
+        {
+            id: 3,
+            email: "diriye@gmail.com",
+            fname: "Diriye",
+            lname: "Cali",
+        },
+        {
+            id: 4,
+            email: "maxamed@gmail.com",
+            fname: "Maxamed",
+            lname: "Muse",
+        },
+        {
+            id: 5,
+            email: "yare@gmail.com",
+            fname: "Ahmed Yare",
+            lname: "Muse",
+        },
+
+        {
+            id: 6,
+            email: "keyga@gmail.com",
+            fname: "keeyga",
+            lname: "keen waaye",
+        },
+    ];
+    document.getElementById('userselect').onchange = (e) => {
+        let selectedUser = usersData.find(userdata => userdata.id == e.target.value);
+        console.log(selectedUser.id);
+        
+        document.getElementById('fn').value = selectedUser.fname;
+        document.getElementById('emailfield').value = selectedUser.email;
+        document.getElementById('ln').value = selectedUser.lname;
+    };
+</script>
+
+
+</div><!--end of main container of the page-->
+
+   {% endblock %}
+                   
+   
+
+
+<!--the beloow  code if for you to just see if you can get some knowledge from it.-->
+
+<!doctype html>
+<html>
+	<head>
+		<script type="text/javascript">
+			//delegate amount
+			var delAmount = 0;
+			//spouse amount
+			var agreeAmount = 0;
+			
+			//compare date so that depending on the date value we can set some amount to the particular field
+			var x ='15-12-2014';
+			var a = x.split('-');
+			var date = new Date (a[2], a[1] - 1,a[0]);//using a[1]-1 since Date object has month from 0-11
+			var Today = new Date();
+			if (date > Today) {
+				delAmount = 1200;
+				agreeAmount = 500;
+			} else {
+				delAmount = 1500;
+				agreeAmount = 700;
+			}
+			
+			//total amount
+			var totalAmount = delAmount;
+			//below function is called when the page loads
+			function populateAmount() {
+				//populate delegate field with delegate amount
+				document.getElementById('delAmount').value = delAmount;
+				//populate total field with total amount
+				document.getElementById('totalAmount').value = totalAmount;
+			}
+			//below function is called when checkbox is checked
+			function calcTotalAmount() {
+				//populate delegate amount
+				document.getElementById('delAmount').value = delAmount;
+				//recalculate and populate total amount field
+				if(document.getElementById('chkBox').checked && document.getElementById('chkBox').value == 1) {
+					totalAmount = delAmount + agreeAmount;
+				} else {
+					totalAmount = totalAmount - agreeAmount;
+				}
+				document.getElementById('totalAmount').value = totalAmount;
+			}
+		</script>
+	</head>
+	<body onload="populateAmount();">
+		<div style="width:650px;margin:auto;">
+			<!-- Delegate Amount -->
+			<p>
+				<label>Amount</label><br/>
+				<input type="text" id="delAmount" disabled="disabled">
+			</p>
+			<!-- Checkbox -->
+			<p>
+				<label>Check</label><br/>
+				<input type="checkbox" id="chkBox" value="1" onchange="calcTotalAmount();">
+			</p>
+			<!-- Total Amount -->
+			<p>
+				<label>Total Amount</label><br/>
+				<input type="text" id="totalAmount" disabled="disabled">
+			</p>
+		</div>
+		</div>
+	</body>
+</html>

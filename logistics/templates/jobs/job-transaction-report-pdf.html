@@ -1,0 +1,236 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Job Transaction Report PDF</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!--shaafi invoice pdf-->
+    <style>
+        body{
+            background-color: white; 
+            margin: 0;
+            padding: 0;
+        }
+        h3{
+          font-family: 'Times New Roman', Times, serif;
+        }
+       
+        .body-section{
+            padding: 16px;
+            border: 1px solid white;
+            border-radius: 10px 20px;
+        }
+        table{
+            background-color: #fff;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        table td {
+            vertical-align: middle !important;
+            text-align: left;
+            margin-left: 3px;
+            padding-left: 3px;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 15px;
+        }
+        table th, table td {
+            padding-top: 02px;
+            padding-bottom: 05px;
+        }
+        .table-bordered{
+            box-shadow: 0px 0px 5px 0.5px green;
+            background-color: #fcf8f8;
+        }
+        .table-bordered td, .table-bordered th {
+            border: 1.5px solid #8dd3ee;
+        }
+        .text-right{
+            text-align: left;
+        }
+        .table-header-row{
+            
+            background-color:rgb(226, 211, 211);
+        }
+        .float-right{
+            float: right;
+        }
+        .test{
+          border-radius: 2px;
+          border: 2px solid #8dd3ee;
+          width: 5px;
+          height: 20px;
+
+        }
+        .Allifmaal-details{
+          border: 1px;
+          word-spacing: normal;
+          letter-spacing: normal;
+          line-height: 0px;
+          font-family: 'Times New Roman', Times, serif;
+          font-size: 14px;
+          margin-top: 0px;
+          font-weight: normal;
+          
+        }
+        th{
+          border:none;
+          text-align: left;
+        
+        }
+        table thead tr{
+          border: none;
+        }
+        .invoice-details{
+          line-height: 0px;
+          margin-left: 3px;
+          padding-left: 3px;
+          margin-top: -5px;
+          
+        }
+        
+
+
+div.invoice-ribbon {
+	text-align:left;
+  -ms-transform: rotate(-10deg);
+
+	padding:3px 0;
+	left:-5px;
+	top:11px;
+	width:120px;
+  transform: rotate(-150deg);
+  transform: translateY(0.125em);
+
+	font-size:25px;
+	color:green;
+  float: left;
+  font-family:'Times New Roman', Times, serif
+}
+.expert{
+  text-align: right;
+ 
+}
+.table-header-row{
+  margin-left: 3px;
+  padding-left: 3px;
+}
+.customer-details{
+  background-color: white;
+  margin-left: 3px;
+  padding-left: 3px;
+ 
+}
+tr.row1{
+  background-color: white;
+  
+}
+.footer{
+  height: 100px; 
+    width:100%;
+    position: absolute;
+    left: 0;
+    bottom: 0; 
+}
+
+    </style>
+
+
+  
+</head>
+<body>
+ <h1 style="color: black;">Job {{my_job_id}} Transactions</h1>
+ Description:  {{my_job_id.description}}<br>
+ Client:  {{my_job_id.customer}} <br>
+ Status:  {{my_job_id.status}} <br>
+ Opened date: {{my_job_id.opened_date}}<br>
+
+
+    <table class="table-bordered">
+       
+        
+			      <thead>
+			        <tr>
+			         
+			          <th class="table-header-row">Item</th>
+                      <th class="table-header-row">Quantity</th>
+			          
+			          <th class="table-header-row">Unit Cost</th>
+			          <th class="table-header-row">Linecost</th>
+                      <th class="table-header-row">Unit price</th>
+                      <th class="table-header-row">Selling price</th>
+			        </tr>
+			      </thead>
+			      <tbody>
+                    {% for item in job_Items %}
+                    <tr>
+
+                        <td>{{item.description}}</td>
+                        <td>{{item.quantity|floatformat:2}}</td>
+                        <td>{{item.unit_cost|floatformat:2}}</td>
+                        <td style="background-color: rgb(250, 197, 184);">{{item.lineamount|floatformat:2}}</td>
+                        <td>{{item.unit_price|floatformat:2}}</td>
+                        <td style="background-color: rgb(12, 177, 1);padding-right: 10px;">{{item.sellingamount|floatformat:2}}</td>
+                        
+                        
+                      </tr>
+                    {% endfor %}
+                    
+                    <tr>
+                        <td colspan="3" class="text-right"><h6 style="text-align: left;">Total</h6></td>
+                        <td> 
+                          
+                          <td><h6>{{total_cost|floatformat:2}}</h6></td>
+                          
+                          <td><h6>{{invoiceTotal|floatformat:2}}</h6></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="text-right"><h6>Profit</h6></td>
+                        <td> <h6>{{gross_profit|floatformat:2}}</h6> </td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="text-right"><h6>Profit %</h6></td>
+                        <td> <h6>{{profit_percentage|floatformat:2}}</td></h6>
+                    </tr>
+			       </tbody>
+             
+            
+              
+            
+			    </table>
+
+			</div>
+
+
+		  </div>
+		</div>
+	</div>
+</div>
+</div>
+<br>
+       
+</div>
+<h4>With many thanks</h4>
+<h4 >Salesperson: <strong> {{system_user}}</strong></h4>
+
+<br>
+
+<div class="body-section">
+    
+      <a href="https://www.alwen.com/" class="float-right">www.alwen.com</a>
+    
+   
+</div>      
+</div> 
+
+</body>
+</html>
+
+
+
+
+
+         

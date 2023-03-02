@@ -1,0 +1,92 @@
+
+{% extends 'dashboard/stock-base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block style %}
+{{title}}
+{% endblock %}
+
+{% block title %}
+{{trans_or}}
+{%endblock%}
+
+{% block info %}
+
+<a href="{% url 'stockmanagementapp:stock-dashboard' %}">
+    <button class="btn btn-success">Dashboard</button>
+</a>
+<a href="{% url 'logistics:alwen_jobs_list' %}">
+  <button class="btn btn-success">Jobs</button>
+</a>
+
+
+{% endblock %}
+
+{% block leftsection %}
+
+
+<form method='POST' action='' enctype="multipart/form-data">{% csrf_token %}
+    {{form}}
+    
+              
+    <input type="submit" value='    Add   ' class="btn btn-success btn-block">
+<br>
+
+
+{% endblock %}
+
+{% block header %}
+{{trans_or}}
+{% endblock %}
+
+{% block body %}
+
+{{item.description}}
+{{item.quantity}}
+<br>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      
+      <th scope="col">Item</th>
+      <th scope="col">TRF Qty</th>
+      
+      <th scope="col">Main stock Qty</th>
+      
+     
+    </tr>
+  </thead>
+  <tbody id="tbody">
+    
+    {% for driver in drivers %}
+
+      <td>{{driver.name}}</td>
+      
+      <td>
+        {% if driver.photo %}
+         <img src="{{driver.photo.url}}"  style="width: 100px;">
+        {% else %}
+        <span class="text-muted">No cover</span>
+        {% endif %}
+
+      </td>
+      
+      
+    </tr>
+    
+    {% endfor %}
+  </tbody>
+</table>
+
+               
+{% endblock %}
+
+{% block main %}
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

@@ -1,0 +1,638 @@
+{% extends 'allifmaalapp/bases/allifbase.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+{% load humanize %}
+Dashboard
+{% endblock %}
+{% block style %}
+   
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+<!--FontAwesome CDN ...necessary for the icons-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+    integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+
+<script src="{% static 'js/chart.min.js' %}">/*Remember that this is a dist file.... source is: 
+https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js*/
+
+</script>
+<!--Chartjs CDN-->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
+<style>
+    /* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {}
+
+/* .............. note that 1cm = 37.8px.....................*/
+
+  
+    body {
+        /*background-color: #F6F7F8;*/
+        font-size: 2rem;
+        opacity: 1;
+        position:sticky;
+        overflow: auto;
+        text-align: left;
+        max-width: 100%; 
+
+        /*start of setting up the background image*/
+        background-image: url('{% static "images/whiteback2.jpg" %}')  ; /*....#F6F7FA....*/
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: left;
+        opacity: 1;
+        padding-left: 10px;
+        padding: auto;
+        /*end of setting up the background image*/
+    }
+   
+    .container{
+      background-color: #F6F7F8;
+      }
+    .container tr:hover {
+      background-color: #FFF;
+      color: black;
+    }
+    table{
+      background-color: #F6F7F8;
+    }
+.mybuttonlinks{
+    margin-top: 7px; margin-left: 7px;
+    margin-bottom: 5px;
+ 
+}
+.container tr{
+    border: 1px solid black;
+}
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:200px) and (max-width:800px) {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+        .container {
+            
+            margin-top: 110px;
+            /*display: inline-block;
+            overflow: auto;*/
+            font-size: 0.95rem;
+           
+            
+            color:black;
+            overflow: auto;
+            overflow-x: scroll;
+            overflow-y: scroll;
+            height: 480px;
+          
+        }
+        .mycomments{
+          display: none;
+        }
+       
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+
+  
+ 
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:800px) and (max-width:1000px) {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+        .container{
+            
+            /*display: inline-block;
+            overflow: auto;*/
+            font-size: 0.95rem;
+           
+            margin-top: 8px;
+            margin-left: auto;
+            padding-left: 90px;
+            
+           
+            
+            
+        }
+        
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+
+ 
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:1000px) and (max-width:2000px) {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+        .container {
+            
+            margin-top: 10px;
+            display: block;
+           
+            font-size: 0.95rem;
+            
+            margin-left:auto ;
+            
+            margin-right: auto;
+            margin: auto;
+            padding-left: 90px;
+            
+            
+          
+        }
+        
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:2000px)  {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+       .container {
+            
+            margin-top: 10px;
+            display: block;
+            overflow: auto;
+            font-size: 1.00rem;
+            
+            margin-left: 120px;
+            overflow-x: hidden;
+            margin-right: 20px;
+            
+          
+        }
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+ 
+    </style>
+   {%endblock%}
+   
+   {% block body %}
+ 
+<div class="container"><!--start of main container of the page--...#17a2b8;  -->
+
+    <!--start of first row-->
+    <div class="row mt-4" >
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header text-white" style="background-color:#006666;">
+                  Main Company Assets {{assets_tot_val|floatformat:2|intcomma}}
+                </div>
+               
+                
+                
+                <div class="col-md-12">
+                    <div class="column" style="background-color:#F6F7F8;">
+                      
+                      <canvas id="myallifchart" width="400" height="300"></canvas>
+                              <script>
+                                  var ctx33 = document.getElementById('myallifchart').getContext('2d');
+                                  var myallifchart = new Chart(ctx33, {
+                                      type: 'doughnut',
+
+                                      data: {
+                                        labels: [{% for items in main_assets %} '{{items.description|truncatewords:2}}', {% endfor %}],
+
+                                          datasets: [{
+                                            
+                                              label: 'Current Prospects',
+                                              data: [{% for items in main_assets %} {{items.value}}, {% endfor %}],
+                                              backgroundColor: [
+                                                'rgb(2, 7, 174)',
+                                                'rgb(35, 150, 92)',
+                                                  
+                                                  'rgb(2, 7, 0)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgb(118, 40, 28,1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgb(254, 0, 181,1)',
+                                                  
+                                                  'rgb(121, 214, 1)',
+                                                  'rgb(97, 7, 0)',
+                                                  'rgb(255, 153, 1)',
+                                                  'rgb(2, 98, 115)',
+                                                  'rgb(94, 89, 92)',
+                                                  'rgb(116, 46, 88)',
+                                                  'rgb(73, 42, 141)',
+                                                  
+                                              ],
+                                              borderColor: [
+                                                'rgb(2, 7, 174)',
+                                                'rgb(35, 150, 92)',
+                                                  
+                                                  'rgb(2, 7, 0)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgb(118, 40, 28,1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgb(254, 0, 181,1)',
+                                                  
+                                                  'rgb(121, 214, 1)',
+                                                  'rgb(97, 7, 0)',
+                                                  'rgb(255, 153, 1)',
+                                                  'rgb(2, 98, 115)',
+                                                  'rgb(94, 89, 92)',
+                                                  'rgb(116, 46, 88)',
+                                                  'rgb(73, 42, 141)',
+                                              ],
+                                              borderWidth: 1
+                                          }]
+                                      },
+                                      options: {
+                                          scales: {
+                                              yAxes: [{
+                                                  ticks: {
+                                                      beginAtZero: true
+                                                  }
+                                              }]
+                                          }
+                                      }
+                                  });
+                              </script>
+                    </div>
+                    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+        
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header text-white" style="background-color: #006666;">
+                    Current Prospects Total Value :{{total_value_of_prospects|floatformat:2|intcomma}}
+                </div>
+                
+                 
+
+                <div class="col-md-12">
+                    <div class="column" style="background-color:#F6F7F8;">
+                      
+                      <canvas id="myChart3" width="400" height="300"></canvas>
+                              <script>
+                                  var ctx3 = document.getElementById('myChart3').getContext('2d');
+                                  var myChart3 = new Chart(ctx3, {
+                                      type: 'bar',
+
+                                      data: {
+                                        labels: [{% for items in prospects %} '{{items.customer.name|truncatewords:2}}', {% endfor %}],
+
+                                          datasets: [{
+                                            
+                                              label: 'Current Prospects',
+                                              data: [{% for items in prospects %} {{items.total}}, {% endfor %}],
+                                              backgroundColor: [
+                                                'rgb(2, 7, 174)',
+                                                'rgb(35, 150, 92)',
+                                                  
+                                                  'rgb(2, 7, 0)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgb(118, 40, 28,1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgb(254, 0, 181,1)',
+                                                  
+                                                  'rgb(121, 214, 1)',
+                                                  'rgb(97, 7, 0)',
+                                                  'rgb(255, 153, 1)',
+                                                  'rgb(2, 98, 115)',
+                                                  'rgb(94, 89, 92)',
+                                                  'rgb(116, 46, 88)',
+                                                  'rgb(73, 42, 141)',
+                                                  
+                                              ],
+                                              borderColor: [
+                                                'rgb(2, 7, 174)',
+                                                'rgb(35, 150, 92)',
+                                                  
+                                                  'rgb(2, 7, 0)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgb(118, 40, 28,1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgb(254, 0, 181,1)',
+                                                  
+                                                  'rgb(121, 214, 1)',
+                                                  'rgb(97, 7, 0)',
+                                                  'rgb(255, 153, 1)',
+                                                  'rgb(2, 98, 115)',
+                                                  'rgb(94, 89, 92)',
+                                                  'rgb(116, 46, 88)',
+                                                  'rgb(73, 42, 141)',
+                                              ],
+                                              borderWidth: 1
+                                          }]
+                                      },
+                                      options: {
+                                          scales: {
+                                              yAxes: [{
+                                                  ticks: {
+                                                      beginAtZero: true
+                                                  }
+                                              }]
+                                          }
+                                      }
+                                  });
+                              </script>
+                    </div>
+                    </div>
+
+
+                    </div></div>
+
+                    <div class="col-md-4">
+                    <div class="card">
+                    <div class="card-header text-white" style="background-color:#006666;">
+                    Posted Invoices {{total_value_of_latest_posted_invoices|floatformat:2|intcomma}}
+                    </div>
+                    
+                        <div class="column" style="background-color:#F6F7F8;">
+                          
+                          <canvas id="myChart5" width="150" height="100"></canvas>
+                                  <script>
+                                      var ctx5 = document.getElementById('myChart5').getContext('2d');
+                                      var myChart5 = new Chart(ctx5, {
+                                          type: 'line',
+                                          data: {
+                                              labels: [{% for items in posted_invoices %} '{{items.customer}}', {% endfor %}],
+                                              datasets: [{
+                                                  label: 'Latest Posted Invoices',
+                                                  data: [{% for items in posted_invoices %} {{items.invoice_total}}, {% endfor %}],
+                                                  
+                                                  backgroundColor: [
+                                                  'rgb(2, 7, 174,0.5)',
+                                                'rgb(35, 150, 92,1)',
+                                                  
+                                                  'rgb(2, 7, 0,1)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgb(118, 40, 28,1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgb(254, 0, 181,1)',
+                                                  
+                                                  'rgb(121, 214, 1)',
+                                                  'rgb(97, 7, 0)',
+                                                  'rgb(255, 153, 1)',
+                                                  'rgb(2, 98, 115)',
+                                                  'rgb(94, 89, 92)',
+                                                  'rgb(116, 46, 88)',
+                                                  'rgb(73, 42, 141)',
+                                                  ],
+                                                  borderColor: [
+                                                'rgb(2, 7, 174,1)',
+                                                'rgb(35, 150, 92,1)',
+                                                  
+                                                  'rgb(2, 7, 0,1)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgb(118, 40, 28,1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgb(254, 0, 181,1)',
+                                                  
+                                                  'rgb(121, 214, 1)',
+                                                  'rgb(97, 7, 0)',
+                                                  'rgb(255, 153, 1)',
+                                                  'rgb(2, 98, 115)',
+                                                  'rgb(94, 89, 92)',
+                                                  'rgb(116, 46, 88)',
+                                                  'rgb(73, 42, 141)',
+                                              ],
+                                                  borderWidth: 1
+                                              }]
+                                          },
+                                          options: {
+                                              scales: {
+                                                  yAxes: [{
+                                                      ticks: {
+                                                          beginAtZero: true
+                                                      }
+                                                  }]
+                                              }
+                                          }
+                                      });
+                                  </script>
+                        </div>
+                        </div>
+
+            </div></div>
+
+            <!--end of first row-->
+
+            <!--start of second row-->
+
+            
+    <div class="row mt-12" >
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header text-white" style="background-color: #006666;">
+                   Platinum Customers Turnover {{gold_customers_turnover|floatformat:2|intcomma}}
+                </div>
+                
+
+                    <!--start of the scrollable table section-->
+<div style="margin-top: 20px;">
+
+    <style>
+        .Allifmaal-scroll-table{
+          background-color: #F6F7F8;
+          width: auto;
+          height: 250px;
+          
+          overflow-x: scroll;
+          overflow-y: scroll;
+          margin-left: 2px;
+          overflow: auto;
+          margin-right: 1px;
+        }
+          
+            tr:nth-child(odd) {
+            background-color: rgb(233, 229, 230);
+            }
+            tr:nth-child(even) {
+            background-color: #a6d3ff;
+            }
+
+            th:nth-child(odd) {
+            background-color: #F6F7F8;
+            }
+
+            th:nth-child(even) {
+            background-color: #F6F7F8;
+            }
+        </style>
+       
+       
+        <div class="Allifmaal-scroll-table" style="text-align: center;">
+
+            <table class="table">
+                <thead>
+                  <tr>
+                     
+                      <th>Customer</th>
+                      <th>Balance</th>
+                      <th>Turnover</th>
+                  
+                  </tr></thead>
+                  <tbody>
+                      {% for item in gold_customers %}
+                    <tr>
+                      
+                      <td>{{item.name|truncatechars:10}}</td>
+                      <td>{{item.balance|intcomma}}</td>
+                      <td>{{item.turnover|intcomma}}</td>
+                      
+                    </tr>
+                   
+                    {% endfor %}
+                  </tbody>
+                </table>
+       
+        </div>
+        <!--end of the scrollable table section-->
+        </div>
+
+
+            </div>
+
+        </div>
+        
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header text-white" style="background-color: #006666;">
+                Main Debtors Total Balances {{debtor_total_balance|floatformat:2|intcomma}}
+                </div>
+                
+
+                <div class="col-md-12">
+                    <div class="column" style="background-color:#F6F7F8;">
+                      
+                      <canvas id="myChart6" width="150" height="100"></canvas>
+                              <script>
+                                  var ctx6 = document.getElementById('myChart6').getContext('2d');
+                                  var myChart6 = new Chart(ctx6, {
+                                      type: 'pie',
+                                      data: {
+                                          labels: [{% for items in debtors %} '{{items.name}}', {% endfor %}],
+                                          datasets: [{
+                                              label: 'Main Debtors',
+                                              data: [{% for items in debtors %} {{items.balance}}, {% endfor %}],
+                                              backgroundColor: [
+                                                  'rgba(255, 99, 132, 1)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgba(255, 206, 86, 1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgba(255, 159, 64, 1)',
+                                                  'rgba(25, 19, 132, 1)',
+                                                  '#f8912ab',
+                                              ],
+                                              
+                                              borderColor: [
+                                                  'rgba(255, 99, 132, 1)',
+                                                  'rgba(54, 162, 235, 1)',
+                                                  'rgba(255, 206, 86, 1)',
+                                                  'rgba(75, 192, 192, 1)',
+                                                  'rgba(153, 102, 255, 1)',
+                                                  'rgba(255, 159, 64, 1)'
+                                              ],
+                                              borderWidth: 1
+                                          }]
+                                      },
+                                      options: {
+                                          scales: {
+                                              yAxes: [{
+                                                  ticks: {
+                                                      beginAtZero: true
+                                                  }
+                                              }]
+                                          }
+                                      }
+                                  });
+                              </script>
+                    </div>
+                    </div>
+                    </div></div>
+
+                    <div class="col-md-4">
+                    <div class="card">
+                    <div class="card-header text-white" style="background-color: #006666;">
+                    Main Creditors Total Balances {{creditors_total_balance|floatformat:2|intcomma}}
+                    </div>
+                    
+                        <div class="column" style="background-color:#F6F7F8;">
+                          
+                          <canvas id="myChart7" width="150" height="100"></canvas>
+                                  <script>
+                                      var ctx7 = document.getElementById('myChart7').getContext('2d');
+                                      var myChart7 = new Chart(ctx7, {
+                                          type: 'polarArea',
+                                          data: {
+                                              labels: [{% for items in creditors %} '{{items.name}}', {% endfor %}],
+                                              datasets: [{
+                                                  label: 'Main Creditors',
+                                                  data: [{% for items in creditors %} {{items.balance}}, {% endfor %}],
+                                                  backgroundColor: [
+                                                      'rgba(255, 99, 132, 1)',
+                                                      'rgba(54, 162, 235, 1)',
+                                                      'rgba(255, 206, 86, 1)',
+                                                      'rgba(75, 192, 192, 1)',
+                                                      'rgba(153, 102, 255, 1)',
+                                                      'rgba(255, 159, 64, 1)',
+                                                      'rgba(255, 99, 132, 1)',
+                                                      '#f8912ab',
+                                                  ],
+                                                  borderColor: [
+                                                      'rgba(255, 99, 132, 1)',
+                                                      'rgba(54, 162, 235, 1)',
+                                                      'rgba(255, 206, 86, 1)',
+                                                      'rgba(75, 192, 192, 1)',
+                                                      'rgba(153, 102, 255, 1)',
+                                                      'rgba(255, 159, 64, 1)'
+                                                  ],
+                                                  borderWidth: 1
+                                              }]
+                                          },
+                                          options: {
+                                              scales: {
+                                                  yAxes: [{
+                                                      ticks: {
+                                                          beginAtZero: true
+                                                      }
+                                                  }]
+                                              }
+                                          }
+                                      });
+                                  </script>
+                        </div>
+                        </div>
+
+            </div></div>
+            <!--end of second row-->
+           
+    
+</div><!--end of main container of the page-->
+
+
+   {% endblock %}

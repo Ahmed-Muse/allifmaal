@@ -1,0 +1,20 @@
+PO LISTS
+<a href="{% url 'stockmanagementapp:create-new-zamzam-po' %}">
+    <button>New PO</button>
+</a>
+
+
+{% for po in zamzam_purchases %}
+<a href="{% url 'stockmanagementapp:add-zamzam-po-details' po.id %}">
+
+
+{{po.po_ref}}
+</a>
+<a href="{% url 'stockmanagementapp:receive-zamzam-po-to-stock' po.id %}">
+    receive
+
+</a>
+
+
+<br>
+{% endfor %}

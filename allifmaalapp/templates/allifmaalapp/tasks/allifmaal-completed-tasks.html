@@ -1,0 +1,386 @@
+{% extends 'allifmaalapp/bases/allifbase.html'%}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block title %}
+{{title}}
+{% endblock %}
+{% block style %}
+   
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+<!--FontAwesome CDN ...necessary for the icons-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+    integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+
+<script src="{% static 'js/chart.min.js' %}">/*Remember that this is a dist file.... source is: 
+https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js*/
+
+</script>
+<!--Chartjs CDN-->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
+<style>
+    /* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {}
+
+/* .............. note that 1cm = 37.8px.....................*/
+
+  
+    body {
+        /*background-color: #F6F7F8;*/
+        font-size: 2rem;
+        opacity: 1;
+        position:sticky;
+        overflow: auto;
+        text-align: left;
+        max-width: 100%; 
+        background-color: #F6F7F8;
+        margin: auto;
+        padding: auto;
+        
+
+    }
+   
+    .container{
+      background-color: #F6F7F8;
+      }
+    .container tr:hover {
+      background-color: #FFF;
+      color: black;
+    }
+    table{
+      background-color: #F6F7F8;
+    }
+.mybuttonlinks{
+    margin-top: 7px; margin-left: 7px;
+    margin-bottom: 5px;
+ 
+}
+#allif-section-headers{
+    background-color: #e9eaec;
+    color: black;
+    font-size: 16px;
+    text-align: center;
+}
+#allif-link-buttons{
+    background-color: #F6F7F8;
+    color: black;
+}
+#allif-link-buttons:hover {
+    background-color: #714b67;
+    color: white;
+}
+
+
+a:link{
+  text-decoration: none;
+  
+}
+       
+                      
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:200px) and (max-width:800px) {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+        .container {
+            
+            margin-top: 110px;
+            /*display: inline-block;
+            overflow: auto;*/
+            font-size: 0.95rem;
+           
+            
+            color:black;
+            overflow: auto;
+            overflow-x: scroll;
+            overflow-y: scroll;
+            height: 480px;
+          
+        }
+        .mycomments{
+          display: none;
+        }
+       
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+
+  
+ 
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:800px) and (max-width:1000px) {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+        .container{
+            
+            /*display: inline-block;
+            overflow: auto;*/
+            font-size: 0.95rem;
+           
+            margin-top: 8px;
+            margin-left: auto;
+            padding-left: 90px;
+            
+        }
+        
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+
+ 
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:1000px) and (max-width:2000px) {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+        .container {
+            
+            margin-top: 10px;
+            display: block;
+           
+            font-size: 0.95rem;
+            
+            margin-left:auto ;
+            
+            margin-right: auto;
+            margin: auto;
+            padding-left: 90px;
+            
+        }
+        
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+
+/************************************************************* starting of styling for extra small mobiles*/
+@media screen and (min-width:2000px)  {
+        /*@media screen and (min-width: 700px) and (max-width:800px) {}*/
+        /*.sidenav {padding-top: 15px;}*/
+        /*.sidenav a {font-size: 18px;}*/
+       .container {
+            
+            margin-top: 10px;
+            display: block;
+            overflow: auto;
+            font-size: 1.00rem;
+            
+            margin-left: 120px;
+            overflow-x: hidden;
+            margin-right: 20px;
+           
+        }
+      }
+/*********************************************************** end of styling for extra small mobiles*/
+table, th, td ,form{
+  border: 1px solid rgb(4, 4, 4);
+  width: auto;
+  
+}
+    </style>
+   
+   {%endblock%}
+   
+   {% block body %}
+ 
+<div class="container"><!--start of main container of the page--...#17a2b8;  -->
+
+    <!--start of first row-->
+    <div class="row mt-12">
+        
+        <div class="col-md-12">
+            <div class="card">
+                <div id="allif-section-headers" class="card-header ">
+                   Completed Tasks
+            </div>
+              <div >
+            <a href="{% url 'allifmaalapp:allifmaal_Tasks' %}">
+              <button id="allif-link-buttons" type="button" class="btn btn-success mybuttonlinks" >
+                Pending Tasks
+
+              </button>
+            
+            </a>
+          
+            </div>
+
+          
+              <table>
+                <tr>
+                  <th colspan="6">Task Description</th>
+                  <th rowspan="2">Mon</th> 
+                  <th rowspan="2">Tue</th>
+                  <th rowspan="2">Wed</th>
+                  <th rowspan="2">Thu</th>
+                  <th rowspan="2"  >Fri</th>
+                  <th rowspan="2">Sat</th>
+                  <th rowspan="2">Sun</th>
+                 
+                </tr>
+                <br>
+          
+                <tr>
+                  <th scope="col">Task</th>
+                  <th scope="col">Status</th>
+                 
+                  <th scope="col">Due</th>
+                  <th scope="col">Remaining Time</th>
+                  <th scope="col">Edit</th>
+                  <th scope="col">Delete</th>
+                  
+          
+                {% for task in completed_tasks %}
+              
+                
+                <tr>
+                 
+                  <td>{{task.task}}</td>
+                  <td>{{task.status}}</td>
+                 
+                  <td>{{task.dueDate|date:'d/m/Y'}}</td>
+                  <td>{{task.dueDate|timeuntil}}</td>
+                   
+          <td> <a href="{% url 'allifmaalapp:markAllifmaalTaskComplete' task.id %}" data-toggle="tooltip" title="Delete this record">
+            <button class="btn btn-success">Inomplete</button></a></td>
+                  
+                
+          <td> <a href="{% url 'allifmaalapp:delete_allifmaal_task' task.id %}" data-toggle="tooltip" title="Delete this record">
+            <button class="btn btn-danger">Delete</button></a></td>
+          {% if task.taskDay == 'Monday' %}
+          <td> 
+            {% if task.status == 'complete' %}
+            <img src="{% static 'img/task.png' %}" width="25">
+          {% else %}
+          <img src="{% static 'img/pending.png' %}" width="25">
+          {% endif %}
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          {% elif task.taskDay == 'Tuesday' %}
+          <td></td>
+          
+          <td>
+            {% if task.status == 'complete' %}
+            <img src="{% static 'img/task.png' %}" width="25">
+          {% else %}
+          <img src="{% static 'img/pending.png' %}" width="25">
+          {% endif %}
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          
+          {% elif task.taskDay == 'Wednesday' %}
+          <td></td>
+          <td></td>
+          <td>{% if task.status == 'complete' %}
+            <img src="{% static 'img/task.png' %}" width="25">
+          {% else %}
+          <img src="{% static 'img/pending.png' %}" width="25">
+          {% endif %}</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          
+          
+          {% elif task.taskDay == 'Thursday' %}
+          <td></td>
+          <td></td>
+          <td></td>
+          
+          <td>{% if task.status == 'complete' %}
+            <img src="{% static 'img/task.png' %}" width="25">
+          {% else %}
+          <img src="{% static 'img/pending.png' %}" width="25">
+          {% endif %}</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          
+          
+          {% elif task.taskDay == 'Friday' %}
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          
+          <td>{% if task.status == 'complete' %}
+            <img src="{% static 'img/task.png' %}" width="25">
+          {% else %}
+          <img src="{% static 'img/pending.png' %}" width="25">
+          {% endif %}</td>
+          <td></td>
+          <td></td>
+          
+          
+          {% elif task.taskDay == 'Saturday' %}
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          
+          <td>{% if task.status == 'complete' %}
+            <img src="{% static 'img/task.png' %}" width="25">
+          {% else %}
+          <img src="{% static 'img/pending.png' %}" width="25">
+          {% endif %}</td>
+          <td></td>
+          
+          
+             
+          {% elif task.taskDay == 'Sunday' %}
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          
+          <td>{% if task.status == 'complete' %}
+            <img src="{% static 'img/task.png' %}" width="25">
+          {% else %}
+          <img src="{% static 'img/pending.png' %}" width="25">
+          {% endif %}</td>
+          
+          {% endif %}
+          
+                    
+                </tr>
+          
+               {% endfor %}
+              </table>
+              </div>
+              
+          
+          
+        </div>
+ 
+      
+      </div>
+        <!-- end of first row-->
+</div><!--end of main container of the page-->
+
+   {% endblock %}
+    
+   
