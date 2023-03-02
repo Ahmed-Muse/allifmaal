@@ -24,8 +24,7 @@ urlpatterns = [
      
 
      path('allifmaalapp/', include('allifmaalapp.urls')),
-     path('stockmanagementapp/', include('stockmanagementapp.urls')),
-
+     
     
     
     
