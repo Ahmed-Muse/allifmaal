@@ -18,12 +18,12 @@ urlpatterns = [
     path('login/', include('django.contrib.auth.urls')),#this ensures and allows that we use the already built in authentication system
     #path('login/', include('login.urls')),#point to login
 
-     path('', include('allifmaalapp.urls')),
-     path('logistics/', include('logistics.urls')),
+    path('', include('allifmaalapp.urls')),
+    path('logistics/', include('logistics.urls')),
 
      
 
-     path('allifmaalapp/', include('allifmaalapp.urls')),
+     #path('allifmaalapp/', include('allifmaalapp.urls')),
      
     
     

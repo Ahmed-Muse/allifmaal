@@ -1,7 +1,7 @@
 from xml.dom import ValidationErr
 from django.shortcuts import render,redirect
 from .forms import *
-
+from allifmaalapp.models import AllifmaalDetailsModel,AllifmaalScopeModel
 from .models import *
 from django.contrib import messages
 from uuid import uuid4
@@ -870,7 +870,7 @@ def alwen_invoice_pdf(request,pk):
     template_path = 'logistics/invoice-pdf.html'
     companyDetails=AllifmaalDetailsModel.objects.all()
     scope=AllifmaalScopeModel.objects.all()
-    alwenco=SepcoLogoModel.objects.all()
+    alwenco=AllifmaalDetailsModel.objects.all()
     context = {
     'invoice_details':invoice_details,
    "invoiceItems":invoiceItems,
