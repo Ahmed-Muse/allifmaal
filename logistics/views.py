@@ -1209,7 +1209,7 @@ def alwen_job_invoice_pdf(request,pk):
     template_path = 'jobs/job-invoice-pdf.html'
     companyDetails=AllifmaalDetailsModel.objects.all()
     scope=AllifmaalScopeModel.objects.all()
-    alwenco=SepcoLogoModel.objects.all()
+    alwenco=AllifmaalDetailsModel.objects.all()
         
     context={
         "my_job_id":my_job_id,
@@ -1293,7 +1293,7 @@ def allif_job_transaction_report_pdf(request,pk):
     template_path = 'jobs/job-transaction-report-pdf.html'
     companyDetails=AllifmaalDetailsModel.objects.all()
     scope=AllifmaalScopeModel.objects.all()
-    alwenco=SepcoLogoModel.objects.all()
+    alwenco=AllifmaalDetailsModel.objects.all()
         
     context={
         "my_job_id":my_job_id,
